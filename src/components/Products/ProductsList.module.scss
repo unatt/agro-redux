@@ -1,0 +1,59 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+@import '../../styles/widths';
+@import '../../styles/icons';
+
+.itemsContainer {
+  grid-area: items;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(448px, 1fr));
+  @media screen and (max-width: $md3) {
+    grid-template-columns: repeat(2, minmax(448px, 1fr));
+  }
+  @media screen and (max-width: $md2) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media screen and (max-width: $md1) {
+    grid-template-columns: auto;
+  }
+  grid-gap: 24px;
+}
+
+.btn {
+  font-weight: 500;
+  font-size: 0.9rem;
+  line-height: 143%;
+  text-align: center;
+  padding: 4px 16px;
+  margin: 5px 5px 5px 0;
+  border: 1px solid #037bff;
+  border-radius: 8px;
+  background-color: transparent;
+
+  color: $primary-color;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+}
+
+.btn--selected {
+  color: #ffffff;
+  background-color: $primary-color;
+  border: none;
+}
+
+.btn--error {
+  color: #ffffff;
+  background-color: rgb(233, 103, 103);
+  border: none;
+  font-size: 1.5rem;
+}
+
+.spinner {
+  grid-area: items;
+  grid-column: span 2;
+  justify-self: center;
+  text-align: center;
+}

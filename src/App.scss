@@ -1,0 +1,22 @@
+@import './styles/colors';
+@import './styles/mixins';
+@import './styles/widths';
+@import './styles/icons';
+
+.root {
+  padding: 0 20px 20px;
+  display: grid;
+  row-gap: 40px;
+  column-gap: 16px;
+  grid-auto-columns: 2fr 1fr;
+  grid-template-areas:
+    'hd hd'
+    'filter .'
+    'items items';
+  @media screen and (max-width: $md3) {
+    grid-template-areas:
+      'hd hd'
+      'filter filter'
+      'items items';
+  }
+}
