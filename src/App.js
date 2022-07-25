@@ -1,6 +1,6 @@
 // import ProductList from './components/ProductList/ProductList'
-import ProductFilter from './components/Products/ProductFilter'
-import ProductSearch from './components/Products/ProductsSearch'
+import ProductFilter from './components/Filter/ProductFilter'
+import ProductSearch from './components/Filter/ProductsSearch'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 
@@ -33,10 +33,11 @@ function App() {
   useEffect(() => {
     dispatch(fetchItems(serializeFilter(filter)))
   }, [dispatch, filter])
+
   return (
     <>
       <ProductSearch />
-      <div className="root">
+      <div className="main">
         <ProductFilter onRetry={retryHandler} />
         {/* <ProductList /> */}
         <ProductsList />

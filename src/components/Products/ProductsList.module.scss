@@ -5,7 +5,6 @@
 
 .itemsContainer {
   grid-area: items;
-
   display: grid;
   grid-template-columns: repeat(3, minmax(448px, 1fr));
   @media screen and (max-width: $md3) {
@@ -27,7 +26,7 @@
   text-align: center;
   padding: 4px 16px;
   margin: 5px 5px 5px 0;
-  border: 1px solid #037bff;
+  border: 1px solid $primary-color;
   border-radius: 8px;
   background-color: transparent;
 
@@ -39,16 +38,16 @@
 }
 
 .btn--selected {
-  color: #ffffff;
+  color: $white;
   background-color: $primary-color;
   border: none;
 }
 
 .btn--error {
-  color: #ffffff;
+  color: $white;
   background-color: rgb(233, 103, 103);
   border: none;
-  font-size: 1.5rem;
+  // font-size: 1.5rem;
 }
 
 .spinner {
