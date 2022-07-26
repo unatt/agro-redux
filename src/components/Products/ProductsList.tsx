@@ -1,17 +1,21 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchItems } from '../../store/items-slice'
+// import { useDispatch, useSelector } from 'react-redux'
+// import { fetchItems } from '../../store/items-slice'
 import ProductItem from './ProductItem'
 import Spinner from '../UI/Spinner'
 import styles from './ProductsList.module.scss'
+import { useAppSelector } from '../../hooks'
 
-const ProductsList = () => {
-  const dispatch = useDispatch()
+interface ProductsListProps {
+  onRetry: VoidFunction
+}
+
+const ProductsList: React.FC<ProductsListProps> = ({ onRetry }) => {
   const retryHandler = () => {
-    dispatch(fetchItems())
+    onRetry()
   }
 
-  const { items, loading } = useSelector(state => state.items)
+  const { items, loading } = useAppSelector(state => state.items)
   return (
     <div className={styles.itemsContainer}>
       {loading === 'loading' && (

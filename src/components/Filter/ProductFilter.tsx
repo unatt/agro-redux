@@ -1,17 +1,21 @@
 import React from 'react'
 import styles from './ProductFilter.module.scss'
-import { useSelector, useDispatch } from 'react-redux'
+import { useAppDispatch, useAppSelector } from '../../hooks'
 import { filterActions } from '../../store/filter-slice'
 import { fetchCategories } from '../../store/categories-slice'
 
-const ProductFilter = () => {
-  const dispatch = useDispatch()
-  const { categories, loading } = useSelector(state => state.categories)
-  const itemsLoadingStatus = useSelector(state => state.items.loading)
+interface ProductsFilterProps {
+  onRetry: VoidFunction
+}
+
+const ProductFilter: React.FC<ProductsFilterProps> = () => {
+  const dispatch = useAppDispatch()
+  const { categories, loading } = useAppSelector(state => state.categories)
+  const itemsLoadingStatus = useAppSelector(state => state.items.loading)
 
   const isFilterDisabled = itemsLoadingStatus === 'loading'
 
-  const filter = useSelector(state => state.filter.filter)
+  const filter = useAppSelector(state => state.filter.filter)
   const handleFilterIsNewUpdate = () => {
     dispatch(filterActions.toggleFilter('isNew'))
   }
@@ -20,8 +24,8 @@ const ProductFilter = () => {
     dispatch(filterActions.toggleFilter('isLimited'))
   }
 
-  const categoryFilterHandler = event => {
-    dispatch(filterActions.changeFilterCategory(event.target.id))
+  const categoryFilterHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    dispatch(filterActions.changeFilterCategory((event.target as Element).id))
   }
 
   const retryHandler = () => {

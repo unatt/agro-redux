@@ -1,20 +1,20 @@
-// import ProductList from './components/ProductList/ProductList'
 import ProductFilter from './components/Filter/ProductFilter'
 import ProductSearch from './components/Filter/ProductsSearch'
-import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from './hooks'
 
 import { fetchCategories } from './store/categories-slice'
 import { fetchItems } from './store/items-slice'
 import ProductsList from './components/Products/ProductsList'
+import { Filter } from './store/filter-slice'
 
 import './App.scss'
 
-function App() {
-  const dispatch = useDispatch()
-  const filter = useSelector(state => state.filter.filter)
+const App: React.FC = () => {
+  const dispatch = useAppDispatch()
+  const filter = useAppSelector(state => state.filter.filter)
 
-  const serializeFilter = filter =>
+  const serializeFilter = (filter: Filter) =>
     [
       ...filter.category.map(categoryId => `category[]=${categoryId}`),
       `isNew=${filter.isNew}`,
@@ -26,6 +26,10 @@ function App() {
     dispatch(fetchCategories())
   }
 
+  const retryFetchItemsHandler = () => {
+    dispatch(fetchItems(serializeFilter(filter)))
+  }
+
   useEffect(() => {
     dispatch(fetchCategories())
   }, [dispatch])
@@ -33,16 +37,14 @@ function App() {
   useEffect(() => {
     dispatch(fetchItems(serializeFilter(filter)))
   }, [dispatch, filter])
-
   return (
-    <>
+    <div>
       <ProductSearch />
       <div className="main">
         <ProductFilter onRetry={retryHandler} />
-        {/* <ProductList /> */}
-        <ProductsList />
+        <ProductsList onRetry={retryFetchItemsHandler} />
       </div>
-    </>
+    </div>
   )
 }
 

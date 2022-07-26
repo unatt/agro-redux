@@ -1,13 +1,18 @@
 import React from 'react'
 import styles from './ProductItem.module.scss'
+import { Item } from '../../store/items-slice'
 
-const ProductItem = ({ item }) => {
+interface ProductsItemProps {
+  item: Item
+}
+
+const ProductItem: React.FC<ProductsItemProps> = ({ item }) => {
   const itemImage = `./images/${item.categoryName}.png`
 
   const isNewBadge = item.isNew ? <div className={styles.newBadge}>New</div> : null
   const isLimitedBadge = item.isLimited ? <div className={styles.limitedBadge}>Limited</div> : null
 
-  let discount = item.discount && <div className={styles.discount}>Discount ${item.discount} per bag</div>
+  const discount = item.discount && <div className={styles.discount}>Discount ${item.discount} per bag</div>
   return (
     <div className={styles.productContainer}>
       <div className={styles.imageContainer}>

@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState, useEffect, ChangeEvent } from 'react'
+import { useAppDispatch, useAppSelector } from '../../hooks'
 
 import styles from './ProductsSearch.module.scss'
 import { filterActions } from '../../store/filter-slice'
 
 const ProductSearch = () => {
-  const filter = useSelector(state => state.filter.filter)
-  const { loading } = useSelector(state => state.items)
+  const filter = useAppSelector(state => state.filter.filter)
+  const { loading } = useAppSelector(state => state.items)
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const [searchInput, setSearchInput] = useState('')
 
-  const searchInputChangeHandler = event => {
+  const searchInputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchInput(event.target.value)
   }
 
@@ -36,7 +36,7 @@ const ProductSearch = () => {
     <div className={styles.header}>
       <div className={styles.title}>Products</div>
       <div className={styles.inputContainer}>
-        <div className={styles.search__icon} disabled={loading !== 'success'}></div>
+        <div className={styles.search__icon}></div>
         <input
           id="search"
           type="text"
