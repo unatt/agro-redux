@@ -6,7 +6,7 @@ import { filterActions } from '../../store/filter-slice'
 
 const ProductSearch = () => {
   const filter = useAppSelector(state => state.filter.filter)
-  const { loading } = useAppSelector(state => state.items)
+  const { loading } = useAppSelector(state => state.products)
 
   const dispatch = useAppDispatch()
 

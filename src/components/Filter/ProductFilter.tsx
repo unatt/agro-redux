@@ -11,17 +11,17 @@ interface ProductsFilterProps {
 const ProductFilter: React.FC<ProductsFilterProps> = () => {
   const dispatch = useAppDispatch()
   const { categories, loading } = useAppSelector(state => state.categories)
-  const itemsLoadingStatus = useAppSelector(state => state.items.loading)
+  const productsLoadingStatus = useAppSelector(state => state.products.loading)
 
-  const isFilterDisabled = itemsLoadingStatus === 'loading'
+  const isFilterDisabled = productsLoadingStatus === 'loading'
 
   const filter = useAppSelector(state => state.filter.filter)
   const handleFilterIsNewUpdate = () => {
-    dispatch(filterActions.toggleFilter('isNew'))
+    dispatch(filterActions.toggleFilterStatus('isNew'))
   }
 
   const handleFilterIsLimitedUpdate = () => {
-    dispatch(filterActions.toggleFilter('isLimited'))
+    dispatch(filterActions.toggleFilterStatus('isLimited'))
   }
 
   const categoryFilterHandler = (event: React.MouseEvent<HTMLButtonElement>) => {

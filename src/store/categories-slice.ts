@@ -8,10 +8,12 @@ type Category = {
 
 interface CategoriesState {
   categories: Category[]
-  loading: string
+  loading: 'idle' | 'loading' | 'success' | 'error'
 }
 
 const initialState: CategoriesState = { categories: [], loading: 'idle' }
+
+export type InitialCategoriesState = typeof initialState
 
 export const fetchCategories = createAsyncThunk<Category[], undefined, { rejectValue: string }>(
   'categories/fetchCategories',
@@ -24,8 +26,6 @@ export const fetchCategories = createAsyncThunk<Category[], undefined, { rejectV
       const categories = await response.json()
       return categories
     } catch (err) {
-      // Use `err.response.data` as `action.payload` for a `rejected` action,
-      // by explicitly returning it using the `rejectWithValue()` utility
       let errorMessage = 'An unknown error occured'
       if (err instanceof Error) {
         errorMessage = err.message

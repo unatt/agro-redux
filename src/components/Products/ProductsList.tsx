@@ -15,7 +15,7 @@ const ProductsList: React.FC<ProductsListProps> = ({ onRetry }) => {
     onRetry()
   }
 
-  const { items, loading } = useAppSelector(state => state.items)
+  const { products, loading } = useAppSelector(state => state.products)
   return (
     <div className={styles.itemsContainer}>
       {loading === 'loading' && (
@@ -26,11 +26,11 @@ const ProductsList: React.FC<ProductsListProps> = ({ onRetry }) => {
       {loading === 'error' && (
         <div className={styles.spinner}>
           <button onClick={retryHandler} className={`${styles.btn} ${styles['btn--error']}`}>
-            Retry loading items
+            Retry loading productss
           </button>
         </div>
       )}
-      {loading === 'success' && items.map(item => <ProductItem key={item.id} item={item} />)}
+      {loading === 'success' && products.map(product => <ProductItem key={product.id} product={product} />)}
     </div>
   )
 }

@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from './hooks'
 
 import { fetchCategories } from './store/categories-slice'
-import { fetchItems } from './store/items-slice'
+import { fetchProducts } from './store/products-slice'
 import ProductsList from './components/Products/ProductsList'
 import { Filter } from './store/filter-slice'
 
@@ -27,7 +27,7 @@ const App: React.FC = () => {
   }
 
   const retryFetchItemsHandler = () => {
-    dispatch(fetchItems(serializeFilter(filter)))
+    dispatch(fetchProducts(serializeFilter(filter)))
   }
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const App: React.FC = () => {
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(fetchItems(serializeFilter(filter)))
+    dispatch(fetchProducts(serializeFilter(filter)))
   }, [dispatch, filter])
   return (
     <div>

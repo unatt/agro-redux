@@ -15,6 +15,8 @@ interface FilterState {
 
 const initialState: FilterState = { filter: initialFilter }
 
+export type InitialFilterState = typeof initialState
+
 type FilterStatus = 'isNew' | 'isLimited'
 
 const filterSLice = createSlice({
@@ -28,7 +30,7 @@ const filterSLice = createSlice({
         state.filter.category.push(action.payload)
       }
     },
-    toggleFilter(state, action: PayloadAction<FilterStatus>) {
+    toggleFilterStatus(state, action: PayloadAction<FilterStatus>) {
       state.filter[action.payload] = !state.filter[action.payload]
     },
     clearFilter(state) {

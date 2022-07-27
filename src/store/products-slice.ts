@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-export type Item = {
+export type Product = {
   id: string
   name: string
   description: string
@@ -10,29 +10,27 @@ export type Item = {
   isLimited: boolean
   isNew: boolean
   price: number
-  discount: number
+  discount: number | null
 }
 
-interface ItemsState {
-  items: Item[]
-  loading: string
+interface ProductsState {
+  products: Product[]
+  loading: 'idle' | 'loading' | 'success' | 'error'
 }
 
-const initialState: ItemsState = { items: [], loading: 'idle' }
+const initialState: ProductsState = { products: [], loading: 'idle' }
 
-export const fetchItems = createAsyncThunk<Item[], string, { rejectValue: string }>(
-  'items/fetchItems',
+export const fetchProducts = createAsyncThunk<Product[], string, { rejectValue: string }>(
+  'products/fetchProducts',
   async (serializedFilter, { rejectWithValue }) => {
     try {
       const response = await fetch(`/api/product?${serializedFilter}`)
       if (!response.ok || response.status !== 200) {
-        throw new Error(`error loading items`)
+        throw new Error(`error loading Products`)
       }
       const data = await response.json()
       return data.results
     } catch (err) {
-      // Use `err.response.data` as `action.payload` for a `rejected` action,
-      // by explicitly returning it using the `rejectWithValue()` utility
       let errorMessage = 'An unknown error occured'
       if (err instanceof Error) {
         errorMessage = err.message
@@ -42,25 +40,25 @@ export const fetchItems = createAsyncThunk<Item[], string, { rejectValue: string
   }
 )
 
-const itemsSLice = createSlice({
-  name: 'items',
+const productsSLice = createSlice({
+  name: 'products',
   initialState: initialState,
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(fetchItems.pending, state => {
+      .addCase(fetchProducts.pending, state => {
         state.loading = 'loading'
       })
-      .addCase(fetchItems.fulfilled, (state, action) => {
-        state.items = action.payload
+      .addCase(fetchProducts.fulfilled, (state, action) => {
+        state.products = action.payload
         state.loading = 'success'
       })
-      .addCase(fetchItems.rejected, state => {
+      .addCase(fetchProducts.rejected, state => {
         state.loading = 'error'
       })
   },
 })
 
-export const itemsActions = itemsSLice.actions
+export const productsActions = productsSLice.actions
 
-export default itemsSLice
+export default productsSLice
