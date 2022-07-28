@@ -16,8 +16,10 @@
 
 * Испольховал Fetch API для работы с API сервера.
 * Использовал Redux, Redux-thunk, Redux Toolkit для глобального состояния. Комбинировал автоматические reducer, созданные с помощью createAsyncThunk и созданные самостоятельно.
-* Использовал TypeScript с максимально возможными ограничениями, не использовал тип "any"
-* ипользовал препроцессор SASS, не использовал UI библиотеки, все стили писал сам. Использовал CSS modules.
+* Использовал TypeScript с максимально возможными ограничениями, не использовал тип "any".
+* Ипользовал препроцессор SASS, не использовал UI библиотеки, все стили писал сам. Использовал CSS modules.
+* В строке поиска был реализован debounce для минимизации нагрузки на сервер.
+* Посколько сервер может отвечать с ошибкой, была сделана их обработка: в случае ошибки пользователю предлагается выполнить повторный
 
 ## Дизайн
 
@@ -31,42 +33,7 @@
 
 В API два эндпойнта:
 #### `GET /api/category` - список категорий
-```json
-[
-  {
-    "id": "string",
-    "name": "string",
-    "type": "string"
-  }
-]
-```
 #### `GET /api/product` - список продуктов
-```json5
-  {
-    "results": [
-      {
-        "id": "string",
-        "name": "string",
-        "description": "string",
-        "categoryId": "string",
-        "categoryName": "string",
-        "categoryType": "string", 
-        "isLimited": "boolean",
-        "isNew": "boolean",
-        "price": "number",
-        "discount": "number | null"
-      }
-    ]
-  }
-```
-
-`GET /api/product` принимает параметры:
-- `isNew`  boolean 
-- `isLimited`  boolean 
-- `category`  [string] 
-- `search` string
-
-❕ API ничего не знает про изображения в карточке продукта, поэтому вам нужно сопоставить категорию с картинкой самостоятельно. В макете есть [отдельная секция](https://www.figma.com/file/sOoPi2gOZvfqjOQHa9awMC/Agro.Club-Home-project-Junior-Dev?node-id=740%3A0) со всеми категориями.
 
 ## Старт
 
