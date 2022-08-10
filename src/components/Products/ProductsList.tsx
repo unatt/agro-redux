@@ -1,6 +1,5 @@
 import React from 'react'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { fetchItems } from '../../store/items-slice'
+
 import ProductItem from './ProductItem'
 import Spinner from '../UI/Spinner'
 import styles from './ProductsList.module.scss'
