@@ -42,7 +42,7 @@
 
 1. Склонировать репозиторий 
 ```shell
-git clone git@github.com:Agro-Club/junior-frontend-test.git
+git clone git@github.com:unatt/agro-redux.git
 ```
 2. Установить модули
 ```shell
